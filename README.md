@@ -1,8 +1,8 @@
-# bm-capi-gitops-demo
+# CAPI Gitops Demo
 
+Local demo of argo cd gitops to create (and manage lifecycle of) capi worker clusters
 
-Local demo of argo cd gitops to create (and manage lifecycle of) worker clusters
-
+Setup CAPI mangement cluster and install ArgoCD
 ```
 # use kind to create "mgmt" cluster
 # install capi on cluster
@@ -19,3 +19,41 @@ kubectl port-forward svc/argocd-server -n argocd 8080:443
 http://localhost:8080/
 
 ```
+Register github repo in Argo. For this demo, we used a personal github access token as `password`
+![img-0](docs/img-0.jpg)
+
+Create ArgoCD Application
+```
+kubectl apply -f management/argo-worker-app.yaml
+```
+
+The application status is initially in OutOfSync state since the application has yet to be deployed, and no Kubernetes resources have been created.
+
+![img-1](docs/img-1.jpg)
+
+Click sync
+
+Sync retrieves the manifests from this repository and performs a kubectl apply
+
+View the worker cluster being created
+
+![img-2](docs/img-2.jpg)
+
+
+Once done, we edit the worker cluster yaml to increase the node count from 1 to 2 and
+push the commit to this repo.
+
+```
+# edit node count in capi-cluster/worker.yaml
+# commit changes
+git add .
+git commit -m "change worker node count from 1 to 2"
+git push origin main
+```
+
+View sync of Argo Application 
+
+![img-3](docs/img-3.jpg)
+
+View resources created
+![img-4](docs/img-4.jpg)
