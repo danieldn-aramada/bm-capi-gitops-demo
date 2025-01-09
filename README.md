@@ -2,11 +2,10 @@
 
 Local demo of argo cd gitops to create (and manage lifecycle of) capi worker clusters
 
-Setup CAPI mangement cluster and install ArgoCD
-```bash
-# use kind to create "mgmt" cluster
-# install capi on cluster
+This assumes a local CAPI mangement cluster (using Kind and clusterctl init --provider docker)
 
+Install ArgoCD
+```bash
 # install argo cd
 kubectl create namespace argocd
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
