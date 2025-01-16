@@ -36,7 +36,7 @@ spec:
       - class: default-worker
         metadata: {}
         name: md-0
-        replicas: {{ .Values.workers.replica }}
+        replicas: {{ .Values.workers.replicas }}
       machinePools:
       - class: default-worker
         name: mp-0
