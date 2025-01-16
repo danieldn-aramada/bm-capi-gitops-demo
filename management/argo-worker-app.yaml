@@ -8,11 +8,13 @@ spec:
     name: ''
     namespace: 'default'
     server: 'https://kubernetes.default.svc'
-    # server: 'https://127.0.0.1:55695'
   source:
-    path: 'capi-cluster/worker'
+    helm:
+      valueFiles:
+      - values.yaml
+    path: 'colo/mgmt04/worker01'
     repoURL: 'https://github.com/danieldn-aramada/bm-capi-gitops-demo.git'
-    targetRevision: HEAD
+    targetRevision: helm
   project: default
   syncPolicy:
     automated:
