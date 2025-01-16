@@ -16,7 +16,7 @@ spec:
     class: quick-start
     controlPlane:
       metadata: {}
-      replicas: 1
+      replicas: {{ .Values.controlPlane.replicas }}
     variables:
     - name: imageRepository
       value: ""
