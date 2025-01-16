@@ -34,6 +34,7 @@ spec:
     workers:
       machineDeployments:
       - class: default-worker
+        metadata: {}
         name: md-0
         replicas: {{ .Values.workers.replica }}
       machinePools:
